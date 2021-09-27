@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReserveController;
+use App\Http\Controllers\RoomController;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +18,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' =>['auth:sanctum']],function(){
+
+    Route::get('/users',[AuthController::class, 'index']);
+    Route::get('/users/{id}',[AuthController::class, 'show']);
+    Route::put('/users/{id}',[AuthController::class, 'update']);
+    Route::resource('reserves',ReserveController::class);
+    Route::get('/reserves/search/user/{id}', [ReserveController::class, 'search']);
+    Route::resource('rooms', RoomController::class);
+    Route::get('/rooms/search/{id}',[RoomController::class,'search']);
+    Route::post('/register',[AuthController::class,'register']);
+    Route::post('/logout',[AuthController::class,'logout']);
+
 });
+
+Route::resource('reserves',ReserveController::class);
+Route::post('/login',[AuthController::class,'login']);
+
+
+
+
+
