@@ -28,6 +28,8 @@ class ReserveController extends Controller
         $request->validate([
             'dateStart' => 'required',
             'dateEnd' => 'required',
+            'hourStart'=> 'required',
+            'hourEnd'=> 'required'
         ]);
 
         Reserve::create($request->all());

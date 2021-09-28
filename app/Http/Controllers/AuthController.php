@@ -17,6 +17,7 @@ class AuthController extends Controller
             'email'=> 'required|string|unique:users,email',
             'password'=>'required|string|confirmed',
             
+            
 
         ]);
 
@@ -24,6 +25,7 @@ class AuthController extends Controller
             'name'=> $fields['name'],
             'email'=> $fields['email'],
             'password'=>bcrypt($fields['password']),
+            'rol_id'=> 2,
            
             
 

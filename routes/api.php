@@ -31,8 +31,6 @@ Route::group(['middleware' =>['auth:sanctum']],function(){
     Route::post('/logout',[AuthController::class,'logout']);
 
 });
-
-Route::resource('reserves',ReserveController::class);
 Route::post('/login',[AuthController::class,'login']);
 
 
