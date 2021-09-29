@@ -14,7 +14,9 @@ class Reserve extends Model
        'description',
        'dateStart',
        'dateEnd',
-       'status'
+       'status',
+       'hourStart',
+       'hourEnd'
     ];
     public function user(){
         return $this->belongsTo(User::class);

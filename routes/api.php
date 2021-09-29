@@ -24,6 +24,7 @@ Route::group(['middleware' =>['auth:sanctum']],function(){
     Route::get('/users/{id}',[AuthController::class, 'show']);
     Route::put('/users/{id}',[AuthController::class, 'update']);
     Route::resource('reserves',ReserveController::class);
+    Route::put('reserves',[ReserveController::class,'store']);
     Route::get('/reserves/search/user/{id}', [ReserveController::class, 'search']);
     Route::resource('rooms', RoomController::class);
     Route::get('/rooms/search/{id}',[RoomController::class,'search']);
