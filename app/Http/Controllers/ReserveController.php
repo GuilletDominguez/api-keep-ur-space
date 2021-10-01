@@ -12,9 +12,24 @@ class ReserveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Reserve::with('user', 'room')->get();
+       $reserve = Reserve::with('user', 'room')->orderBy('status','DESC')->paginate(10);
+
+       return [
+        'paginate' => [
+           'total' => $reserve->total(),
+           'current' => $reserve->currentPage(), 
+           'per_page' => $reserve->perPage(),
+           'last_page' => $reserve->lastPage(),
+           'from' => $reserve->firstItem(),
+           'to' => $reserve->lastPage(),
+        ],
+
+        'reserves'=> $reserve
+
+
+    ];
     }
 
     /**
@@ -49,7 +64,7 @@ class ReserveController extends Controller
      */
     public function show($id)
     {
-        return Reserve::find($id);
+        return Reserve::with('user','room')->find($id);
     }
 
     /**
