@@ -93,5 +93,17 @@ class RoomController extends Controller
         
         return Room::where('name','like','%'.$name.'%')->get();
     }
+         /**
+     * Search room.
+     *
+     * @param  int  $capacity
+     * @return \Illuminate\Http\Response
+     */
+    public function filterCapacity ($capacity)
+    {
+        
+        return Room::where('capacity','like','%'.$capacity.'%')->get();
+    }
+
 
 }
