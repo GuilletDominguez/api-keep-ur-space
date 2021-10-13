@@ -30,7 +30,6 @@ Route::group(['middleware' =>['auth:sanctum']],function(){
     Route::get('/reserves/search/user/{id}', [ReserveController::class, 'search']);
     Route::get('/reserves/search/{id}', [ReserveController::class, 'show']);
     Route::resource('rooms', RoomController::class);
-    Route::get('/rooms/search/{id}',[RoomController::class,'search']);
     Route::get('/rooms/capacity/{num}',[RoomController::class,'filterCapacity']);
     Route::post('/register',[AuthController::class,'register']);
     Route::post('/logout',[AuthController::class,'logout']);

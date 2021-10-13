@@ -113,7 +113,7 @@ class ReserveController extends Controller
     public function search($id)
     {
 
-        return ;
+        return Reserve::where('user_id','=', ''.$id.'')->with('user','room')->get(); 
     }
 
     public function getStats(){
