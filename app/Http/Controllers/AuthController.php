@@ -98,31 +98,17 @@ class AuthController extends Controller
         }
         
 
-        public function update(Request $request, $id){
-            $user = User::find($id);
-            $fields = $request->validate([
 
-                'name'=> 'string',
-                'email'=> 'string',
-                'password'=>'string',
-                'phone_number'=>'string',
-                'rol_id'=>'numeric',
-                
+        public function destroy($id)
+        {
     
-            ]);
-
-            $user->update([
-               
-                'name' => $fields['name'],
-                'email' => $fields['email'],
-                'password' => bcrypt($fields['password']),
-                'phone_number' => $fields['phone_number'],
-                'rol_id' => $fields['rol_id']
-
-            ]);
-
-            return $user;
-         
+            User::destroy($id);
+    
+            $response = [
+    
+                'message' => 'Tu usuario ha sido borrado con éxito'
+            ];
+            return response($response, 200);
         }
 
 

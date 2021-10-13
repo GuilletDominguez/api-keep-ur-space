@@ -113,6 +113,31 @@ class ReserveController extends Controller
     public function search($id)
     {
 
-        return Reserve::where('user_id', 'like', '%' . $id . '%')->get();
+        return ;
+    }
+
+    public function getStats(){
+
+        return [
+            'total' => count(Reserve::all()),
+            'pending' => count(Reserve::where('status', '=', "Pending")->get()),
+            'accepted' => count(Reserve::where('status', '=', "Accepted")->get()),
+            'cancelled'=> count(Reserve::where('status','=', 'Cancelled')->get())
+
+
+        ];
+    }
+
+    public function getStatsByUser($id){
+
+        $user = Reserve::where('user_id', 'like', '%' . $id . '%')->get();
+
+        return [
+            'total' => count($user),
+            'pending' => count($user->where('status', '=', "Pending")),
+            'accepted' => count($user->where('status', '=', 'Accepted')),
+            'cancelled'=> count($user->where('status','=', 'Cancelled'))
+        ];
+
     }
 }
