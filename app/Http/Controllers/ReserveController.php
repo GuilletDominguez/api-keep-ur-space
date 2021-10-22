@@ -14,7 +14,7 @@ class ReserveController extends Controller
      */
     public function index(Request $request)
     {
-       $reserve = Reserve::with('user', 'room')->orderBy('status','DESC')->paginate(10);
+       $reserve = Reserve::with('user', 'room')->orderBy('status','ASC')->paginate(10);
 
        return [
         'paginate' => [
