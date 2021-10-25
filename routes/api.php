@@ -35,6 +35,7 @@ Route::group(['middleware' =>['auth:sanctum']],function(){
     Route::post('/logout',[AuthController::class,'logout']);
     Route::resource('reserves',ReserveController::class);
     Route::put('reserves',[ReserveController::class,'store']);
+    Route::put('reserves/{id}',[ReserveController::class,'update']);
     Route::put('/profile/{id}',[ProfileController::class,'updatePersonalInfo']);
     Route::put('/profile/security/{id}',[ProfileController::class,'updateSecretInfo']);
     Route::get('/pending', [ReserveController::class, 'pendingReserve']);

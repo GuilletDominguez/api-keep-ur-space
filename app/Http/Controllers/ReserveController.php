@@ -144,4 +144,5 @@ class ReserveController extends Controller
     public function pendingReserve(){
        return Reserve::where('status', '=', 'Pending')->orderBy('created_at','ASC')->limit(10)->get();
     }
+    
 }
