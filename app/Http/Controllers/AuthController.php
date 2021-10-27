@@ -25,7 +25,7 @@ class AuthController extends Controller
             'name'=> $fields['name'],
             'email'=> $fields['email'],
             'password'=>bcrypt($fields['password']),
-            'rol_id'=> 2,
+          
            
             
 
@@ -95,7 +95,7 @@ class AuthController extends Controller
 
         public function show($id){
 
-            return User::with('rol')->find($id);
+            return User::find($id);
         }
         
 
@@ -110,6 +110,19 @@ class AuthController extends Controller
                 'message' => 'Tu usuario ha sido borrado con éxito'
             ];
             return response($response, 200);
+        }
+
+
+        public function logged(){
+
+           if(auth()->check()){
+
+            return 'logueado';
+           }
+
+           return 'no logueado';
+
+
         }
 
 

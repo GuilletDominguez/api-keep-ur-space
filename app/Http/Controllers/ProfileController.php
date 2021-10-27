@@ -47,12 +47,17 @@ class ProfileController extends Controller
      */
     
     public function updatePersonalInfo(Request $request, $id){
+
+
+    
         $user = User::find($id);
+        if(auth()->user()->id == $id){
+            
         $fields = $request->validate([
 
             'name'=> 'string',
             'email'=> 'string',
-            'phone_number'=>'string',
+         
 
         ]);
 
@@ -60,13 +65,35 @@ class ProfileController extends Controller
            
             'name' => $fields['name'],
             'email' => $fields['email'],
-            'phone_number' => $fields['phone_number'],
+           
           
 
         ]);
 
         return $user;
+    }
+else if(auth()->check() && auth()->user()->is_admin == 1){
+    $fields = $request->validate([
+
+        'name'=> 'string',
+        'email'=> 'string',
      
+
+    ]);
+
+    $user->update([
+       
+        'name' => $fields['name'],
+        'email' => $fields['email'],
+       
+      
+
+    ]);
+
+    return $user;
+
+}
+    return 'No eres administrador';
     }
      /**
      * Update the specified resource in storage.
@@ -96,7 +123,7 @@ class ProfileController extends Controller
         $user->update([
            
             'password' => bcrypt($fields['password']),
-            'rol_id' => $fields['rol_id'],
+           
             
           
 

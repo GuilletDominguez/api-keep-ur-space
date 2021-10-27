@@ -50,7 +50,7 @@ class ReserveController extends Controller
         Reserve::create($request->all());
 
         $response = [
-            'message' => 'Tu petición se ha registrado con éxito'
+            'message' => 'Tu peticion se ha registrado con exito',
         ];
 
         return response($response, 200);
@@ -76,16 +76,34 @@ class ReserveController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $reserve = Reserve::find($id);
+         if(auth()->user()->id == $reserve->user_id ){
         $reserve->update($request->all());
 
         $response = [
 
-            'message' => 'Tu petición ha sido modificada con éxito'
+            'message' => 'Tu petición ha sido modificada con exito',
+           
         ];
 
         return response($response, 200);
     }
+
+    else if(auth()->check() && auth()->user()->is_admin == 1){
+        $reserve->update($request->all());
+
+        $response = [
+
+            'message' => 'La peticion ha sido modificada con exito',
+           
+        ];
+
+        return response($response, 200);
+    }
+    return 'No tienes permiso para editar esta peticion';
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -95,14 +113,25 @@ class ReserveController extends Controller
      */
     public function destroy($id)
     {
-
-        Reserve::destroy($id);
-
+        $reserve = Reserve::find($id);
+         
+        if(auth()->user()->id == $reserve->user_id ){
+            Reserve::destroy($id);
         $response = [
 
-            'message' => 'Tu petición ha sido borrada con éxito'
+            'message' => 'Tu peticion ha sido borrada con exito'
         ];
         return response($response, 200);
+    }
+    else if(auth()->check() && auth()->user()->is_admin == 1){
+        Reserve::destroy($id);
+        $response = [
+
+            'message' => 'Tu peticion ha sido borrada con exito'
+        ];
+        return response($response, 200);
+    }
+    return 'No tienes permiso para borrar esta peticion';
     }
     /**
      * Search reserves by user.
