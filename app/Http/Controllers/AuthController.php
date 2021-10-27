@@ -81,6 +81,7 @@ class AuthController extends Controller
         $response = [
             'user' => $user,
             'token' => $token,
+            'hola'=>'hola'
             
         ];
 
